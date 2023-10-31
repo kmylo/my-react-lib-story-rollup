@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/my-react-lib-story-rollup"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A simple template for a custom React component library",
   "scripts": {
     "rollup": "rollup -c",
