@@ -9,7 +9,7 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A simple template for a custom React component library",
   "scripts": {
     "build": "rollup -c",
@@ -17,6 +17,7 @@
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "sv": "standard-version",
     "release": "standard-version && git push --follow-tags && npm publish"
   },
   "author": "YOUR_NAME",
