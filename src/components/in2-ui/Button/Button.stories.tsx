@@ -26,15 +26,15 @@ Default.args = {
   variant: "default",
 };
 
-// export const Secondary = Template.bind({});
+export const Secondary = Template.bind({});
 // {
 //   /* () => <Button>Iam</Button>; */
 // }
-// Secondary.args = {
-//   variant: "secondary",
-//   className: "text-orange-500",
-//   children: "secondary",
-// };
+Secondary.args = {
+  variant: "secondary",
+  className: "text-orange-500",
+  children: "secondary",
+};
 // export const ClickMe = Template.bind({});
 // ClickMe.args = {
 //   label: "Click me!",

@@ -1,14 +1,19 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, VariantProps } from "class-variance-authority";
+import { cva, VariantProps, cx } from "class-variance-authority";
 import "./Button.css";
+
+const Loading = () => (
+  <div className="w-4 h-4 rounded-full border-2 border-b-transparent animate-spin border-[inherit]"></div>
+);
 
 // import { cn } from "../../../lib/utils"
 
 // const base = `inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50`
-const base = ["in2-button", { fullWidth: "fullWidth" }];
+// const base = ["in2-button", { fullWidth: "fullWidth" }];
+const base = ["in2-button"];
 
-const buttonVariants = cva(base, {
+const bVariants = {
   variants: {
     state: {
       default: "default-state",
@@ -36,34 +41,57 @@ const buttonVariants = cva(base, {
     variant: "default",
     size: "medium",
   },
-});
+} as const;
+const buttonVariants = cva(base, bVariants);
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   fullWidth?: boolean;
+  loading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, state, variant, size, fullWidth, asChild = false, ...props },
+    {
+      className,
+      loading,
+      state,
+      variant,
+      size,
+      fullWidth,
+      children,
+      // asChild = false,
+      ...props
+    },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button";
+    // const Comp = asChild ? Slot : "button";
+    const btnClass = cx(
+      `myclass`,
+      { fullWidth: fullWidth },
+      buttonVariants({
+        state,
+        variant,
+        size,
+        // className,
+      })
+    );
     return (
-      <Comp
-        // className={cn(buttonVariants({ variant, size, className }))}
-        className={buttonVariants({
-          state,
-          variant,
-          size,
-          // className,
-          // fullWidth,
-        })}
-        ref={ref}
-        {...props}
-      />
+      <button className={btnClass}>{children}</button>
+      // <Comp
+      //   // className={cn(buttonVariants({ variant, size, className }))}
+      //   className={buttonVariants({
+      //     state,
+      //     variant,
+      //     size,
+      //     // className,
+      //     // fullWidth,
+      //   })}
+      //   ref={ref}
+      //   {...props}
+      // />
     );
   }
 );
